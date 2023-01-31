@@ -1,7 +1,7 @@
-#ifndef __ESP_WIFI_H__
-#define __ESP_WIFI_H__
+#ifndef __ESP_WIFI_STATION_H__
+#define __ESP_WIFI_STATION_H__
 
-#include "esp_netif.h"
+#include "esp_netif_cpp.h"
 
 namespace esp
 {
@@ -9,7 +9,7 @@ namespace esp
     {
         class station
         {
-            esp_netif_t* interface;
+            default_wifi_iface interface;
             station();
             ~station();
         public:

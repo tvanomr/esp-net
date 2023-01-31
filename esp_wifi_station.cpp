@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "esp-wifi-station.h"
+#include "esp_wifi_station.h"
 #include "esp_wifi_types.h"
 #include "esp_wifi_default.h"
 #include "esp_wifi.h"
@@ -13,14 +13,17 @@ namespace esp
             static station s;
             return &s;
         }
-        station::station()
+        station::station():interface(netif::get()->create_default_wifi_sta())
         {
-            esp_netif_init();
-            interface = esp_netif_create_default_wifi_sta();
+            wifi_init_config_t cfg=WIFI_INIT_CONFIG_DEFAULT();
+            /*if(cfg.nvs_enable)
+            {
+                auto err=nvs_flash_init();
+                if()
+            }*/
         }
         station::~station()
         {
-            esp_netif_destroy_default_wifi(interface);
         }
     }
 }
